@@ -34,8 +34,34 @@ export class ControlService {
   update(id: number, updateControlDto: UpdateControlDto) {
     return `This action updates a #${id} control`;
   }
+  async updateControlFile(controlId: number, newFile: Express.Multer.File) {
+    const control = await this.controlRepository.findByPk(controlId)
+    const newFileModel = await this.fileService.updateFile(control.fileId, newFile)
+    await this.controlRepository.update(
+      {
+        file: newFileModel,
+      },
+      {
+        where: { id: control.id },
+      }
+    )
+    return await this.controlRepository.findByPk(controlId, { include: { all: true } })
+  }
+  async updateNameDescription(controlId:number, dto:CreateControlDto) {
+    
+    const control = await this.controlRepository.findByPk(controlId)
 
-  remove(id: number) {
+    control.set({
+      description: dto.description,
+      name: dto.name,
+    })
+    const newRes = await control.save() 
+        return newRes
+  }
+  async remove(id: number) {
+    const control = await this.controlRepository.findByPk(id);
+    await this.fileService.deleteFile(control.fileId)
+    await this.controlRepository.destroy({where:{id}})
     return `This action removes a #${id} control`;
   }
 }

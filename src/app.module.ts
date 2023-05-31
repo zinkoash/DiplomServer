@@ -29,6 +29,7 @@ import { PracticeVariant } from './practice/practice-variant.model';
 import { Result } from './students/result.model';
 import { StudentResult } from './students/student-result.model';
 import { ControlModule } from './control/control.module';
+import { HelpModule } from './help/help.module';
 
 @Module({
     controllers: [],
@@ -60,6 +61,7 @@ import { ControlModule } from './control/control.module';
         StudentsModule,
         TheoryModule,
         ControlModule,
+        HelpModule,
     ],
 })
 export class AppModule {

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, Query } from '@nestjs/common';
 import { ControlService } from './control.service';
 import { CreateControlDto } from './dto/create-control.dto';
 import { UpdateControlDto } from './dto/update-control.dto';
@@ -24,11 +24,17 @@ export class ControlController {
     return this.controlService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateControlDto: UpdateControlDto) {
-    return this.controlService.update(+id, updateControlDto);
+  @Patch('patchFile/')
+  @UseInterceptors(FileInterceptor('file'))
+  async updateFile(@Query('controlId') controlId: number, @UploadedFile() file: Express.Multer.File) {
+    const result = await this.controlService.updateControlFile(controlId, file)
+    return result
   }
-
+  @Patch('patchDescription/')
+  async updateDescription(@Query('controlId') controlId: number, @Body() dto:CreateControlDto) {
+    const control = await this.controlService.updateNameDescription(controlId, dto)
+    return control
+  }
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.controlService.remove(+id);
