@@ -1,10 +1,8 @@
-import { HttpException, HttpStatus, Injectable, Body, Inject } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable,  Inject } from '@nestjs/common';
 import * as fs from 'fs';
-import * as iconv from 'iconv-lite';
 import * as path from 'path';
 import axios from 'axios';
-import { JSDOM } from 'jsdom';
-import { S3Service } from 'src/S3/S3.service';
+
 import { InjectModel } from '@nestjs/sequelize';
 import { File } from './files.model';
 import { REQUEST } from '@nestjs/core';
@@ -13,7 +11,7 @@ import * as mammoth from 'mammoth';
 
 @Injectable()
 export class FilesService {
-    constructor(@InjectModel(File) private fileReposiroty: typeof File, private s3Service: S3Service, @Inject(REQUEST) private readonly request: Request) { }
+    constructor(@InjectModel(File) private fileReposiroty: typeof File, @Inject(REQUEST) private readonly request: Request) { }
     getServerURI() {
         const serverUrl = `${this.request.protocol}://${this.request.get('host')}`;
         return serverUrl;

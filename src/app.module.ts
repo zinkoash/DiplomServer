@@ -19,8 +19,7 @@ import { CorsMiddleware } from './midlewares/cors-midleware';
 import { Student } from './students/students.model';
 
 import { TheoryModule } from './theory/theory.module';
-import { S3 } from 'aws-sdk';
-import { S3Module } from './S3/S3.module';
+
 import { File } from './files/files.model';
 import { PracticeFile } from './practice/practice-file.model';
 import { Variant } from './practice/variant.model';
@@ -56,7 +55,6 @@ import { HelpModule } from './help/help.module';
         RolesModule,
         AuthModule,
         FilesModule,
-        S3Module,
         PracticeModule,
         StudentsModule,
         TheoryModule,
