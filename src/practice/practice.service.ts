@@ -118,8 +118,9 @@ export class PracticeService {
                     const fileName = img.src.split('/').reverse()[0];
                     //http://ngaek.by/emm/pr/pr02var/pr2var1.files/image002.gif
                     // Изменяем путь к изображению, добавляя fileId в URL
-                    const newSrc = `http://ngaek.by/emm/pr/pr${practice.number<10?'0'+practice.number:practice.number}var/pr${practice.number}var${index+1}.files/${fileName}`;
-    
+                    // const newSrc = `http://ngaek.by/emm/pr/pr${practice.number<10?'0'+practice.number:practice.number}var/pr${practice.number}var${index+1}.files/${fileName}`;
+                    const newSrc = `${serverUrl}/pr/pr${practice.number<10?'0'+practice.number:practice.number}var/pr${practice.number}var${index+1}.files/${fileName}`;
+
                     // Устанавливаем новый путь к изображению
                     img.src = newSrc;
                 });
