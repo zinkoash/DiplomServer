@@ -116,8 +116,9 @@ export class PracticeService {
                     const img = element as HTMLImageElement;
 
                     const fileName = img.src.split('/').reverse()[0];
+                    //http://ngaek.by/emm/pr/pr02var/pr2var1.files/image002.gif
                     // Изменяем путь к изображению, добавляя fileId в URL
-                    const newSrc = `${serverUrl}/uploads/practice/${mainfile.fileName.split('.')[0]}/variants/pr${practice.number}var${index+1}/pr${practice.number}var${index+1}.files/${fileName}`;
+                    const newSrc = `http://ngaek.by/emm/pr${practice.number}var${index+1}/pr${practice.number}var${index+1}.files/${fileName}`;
     
                     // Устанавливаем новый путь к изображению
                     img.src = newSrc;
